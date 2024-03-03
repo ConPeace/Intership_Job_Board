@@ -22,7 +22,7 @@ app.get('/jobs', (req, res) => {
     const cityQuery = req.query.city || '';
     const jobTypeQuery = req.query.jobType || '';
 
-    const dataDir = '/Users/connorpettepiece/Desktop/Website/Data';
+    const dataDir = path.join(__dirname, 'Data');
 
     // Read all files in the Data directory
     fs.readdir(dataDir, (err, files) => {
