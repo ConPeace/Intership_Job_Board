@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Job Board</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Internship Job Board</h1>
+        </header>
+        <div class="search-bar">
+            <input type="text" id="city" placeholder="City">
+            
+            <select id="jobType">
+                <option value="">Select Job Type</option>
+                <option value="marketing">Marketing</option>
+                <option value="finance">Finance</option>
+                <option value="sales">Sales</option>
+                <option value="data">Data</option>
+                <option value="wealth_management">Wealth Management</option>
+                <option value="Tech">Technology</option>
+                <option value="HR">Human Resources</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="real_estate">Real Estate</option>
+            </select>
+            <button id="searchButton">Search</button>
+        </div>
+        
+        <div id="jobListings">
+            <!-- Job listings will be populated here dynamically with JavaScript -->
+        </div>
+    </div>
+</body>
+</html>
