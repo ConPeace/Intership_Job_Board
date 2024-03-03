@@ -3,16 +3,18 @@ const fs = require('fs');
 const csv = require('csv-parser');
 const path = require('path');
 const app = express();
-const port = 3000;
+
+// Use the environment variable PORT or default to 3000
+const port = process.env.PORT || 3000;
 
 function sanitizeKey(key) {
-  return key.replace(/[^\w\s]/gi, '').trim();
+    return key.replace(/[^\w\s]/gi, '').trim();
 }
 
 function hasMatchingLetters(str1, str2, count) {
-  const letters1 = new Set(str1.toLowerCase().split(''));
-  const matchingLetters = [...str2.toLowerCase()].filter(letter => letters1.has(letter));
-  return new Set(matchingLetters).size >= count;
+    const letters1 = new Set(str1.toLowerCase().split(''));
+    const matchingLetters = [...str2.toLowerCase()].filter(letter => letters1.has(letter));
+    return new Set(matchingLetters).size >= count;
 }
 
 app.use(express.static('public'));
@@ -22,9 +24,9 @@ app.get('/jobs', (req, res) => {
     const cityQuery = req.query.city || '';
     const jobTypeQuery = req.query.jobType || '';
 
+    // Update the dataDir to the relative path where your CSV files are located
     const dataDir = path.join(__dirname, 'Data');
 
-    // Read all files in the Data directory
     fs.readdir(dataDir, (err, files) => {
         if (err) {
             console.error('Error reading Data directory:', err);
@@ -41,7 +43,7 @@ app.get('/jobs', (req, res) => {
                 .pipe(csv())
                 .on('data', (rawData) => {
                     const sanitizedData = {};
-                    Object.keys(rawData).forEach((originalKey) => {
+                    Object.keys(rawData).forEach(originalKey => {
                         const sanitizedKey = sanitizeKey(originalKey);
                         sanitizedData[sanitizedKey] = rawData[originalKey];
                     });
