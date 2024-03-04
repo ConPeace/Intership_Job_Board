@@ -87,7 +87,6 @@ function createJobElements(data) {
 
 
 
-
     data.forEach((job, index) => {
         const jobElement = document.createElement('div');
         jobElement.classList.add('job-listing');
@@ -135,35 +134,63 @@ function createJobElements(data) {
             fullDesc.style.display = fullDesc.style.display === 'none' ? 'block' : 'none';
         });
 
-
     });
-    // After creating job elements, sort them
-    const jobElements = Array.from(jobListings.children);
-    const sortedJobElements = sortJobListings(jobElements);
-    jobListings.innerHTML = '';
-    sortedJobElements.forEach(jobElement => jobListings.appendChild(jobElement));
 
+    
+    
 }
 
-// Initial fetch to load all jobs when the page loads
-fetch('/jobs')
-    .then(response => response.json())
-    .then(data => createJobElements(data))
-    .catch(error => {
-        console.error('Error:', error);
-    });
-
-// Event listener for the search button
-document.getElementById('searchButton').addEventListener('click', () => {
+function fetchAndDisplayJobs(page) {
     const city = document.getElementById('city').value || '';
     const jobType = document.getElementById('jobType').value || '';
-
-    const queryParams = new URLSearchParams({ city, jobType }).toString();
+    const queryParams = new URLSearchParams({ city, jobType, page, limit: 20 }).toString();
 
     fetch(`/jobs?${queryParams}`)
         .then(response => response.json())
-        .then(data => createJobElements(data))
+        .then(data => {
+            createJobElements(data.results);
+            updatePaginationControls(data.nextPage, data.prevPage, data.totalPositions);
+        })
         .catch(error => {
             console.error('Error:', error);
         });
+}
+
+
+function updatePaginationControls(nextPage, prevPage, totalPositions) {
+    const paginationDiv = document.getElementById('pagination');
+    paginationDiv.innerHTML = '';
+
+    const totalPositionsDiv = document.createElement('div');
+    totalPositionsDiv.textContent = `Total Internship Positions: ${totalPositions}`;
+    paginationDiv.appendChild(totalPositionsDiv);
+
+    if (prevPage) {
+        const prevButton = document.createElement('button');
+        prevButton.textContent = 'Previous';
+        prevButton.classList.add('pagination-btn'); // Add this line
+        prevButton.onclick = () => fetchAndDisplayJobs(prevPage);
+        paginationDiv.appendChild(prevButton);
+    }
+
+    if (nextPage) {
+        const nextButton = document.createElement('button');
+        nextButton.textContent = 'Next';
+        nextButton.classList.add('pagination-btn'); // Add this line
+        nextButton.onclick = () => fetchAndDisplayJobs(nextPage);
+        paginationDiv.appendChild(nextButton);
+    }
+}
+
+
+
+document.getElementById('searchButton').addEventListener('click', () => {
+    fetchAndDisplayJobs(1);
 });
+
+// Initial fetch to load the first page of jobs
+fetchAndDisplayJobs(1);
+
+// Initial fetch to load the first page of jobs
+
+
