@@ -140,6 +140,47 @@ header h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
 }
 
+.apply-link{
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+/* Pagination buttons styling */
+.pagination-btn {
+    background-color: rgb(223, 223, 223); 
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination-btn:hover {
+    background-color: rgb(145, 213, 243); /* Darker green on hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  }
+  
+  /* Disable text selection on buttons */
+  .pagination-btn {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+  }
+  
+  /* Additional styling for the pagination container */
+  #pagination {
+    text-align: center; /* Center the buttons */
+    padding: 20px; /* Add some padding around the buttons */
+    margin-top: 20px; /* Add space between listings and pagination */
+  }
+  
 
 
 
