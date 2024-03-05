@@ -143,7 +143,7 @@ function createJobElements(data) {
 function fetchAndDisplayJobs(page) {
     const city = document.getElementById('city').value || '';
     const jobType = document.getElementById('jobType').value || '';
-    const queryParams = new URLSearchParams({ city, jobType, page, limit: 20 }).toString();
+    const queryParams = new URLSearchParams({ city, jobType, page, limit: 10 }).toString();
 
     fetch(`/jobs?${queryParams}`)
         .then(response => response.json())
