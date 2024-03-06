@@ -7,23 +7,19 @@ const app = express();
 // Use the environment variable PORT or default to 3000
 const port = process.env.PORT || 3000;
 
+
 function sanitizeKey(key) {
   return key.replace(/[^\w\s]/gi, '').trim();
 }
 
-
-
-// Helper function to parse date strings in ISO format
 function parseISODate(dateString) {
-  // This assumes the date is in a format parseable by Date constructor
   return new Date(dateString);
 }
 
 app.use(express.static('public'));
 
 function isLocationMatch(location, cityQuery) {
-    if (!cityQuery) return true;
-    return location.toLowerCase().includes(cityQuery.toLowerCase());
+    return cityQuery === '' || location.toLowerCase().includes(cityQuery.toLowerCase());
 }
 
 app.get('/jobs', (req, res) => {
@@ -58,26 +54,20 @@ app.get('/jobs', (req, res) => {
                         sanitizedData[sanitizedKey] = rawData[originalKey];
                     });
 
-                    // Use the 'postingDateParsed' field for the date
                     if (sanitizedData.postingDateParsed) {
                         sanitizedData.parsedDate = parseISODate(sanitizedData.postingDateParsed);
                     }
 
-                     // Use isLocationMatch for a more accurate location match
-                     const cityMatches = isLocationMatch(sanitizedData.location, cityQuery);
-                     const jobTypeMatches = jobTypeQuery === '' || sanitizedData.positionName.toLowerCase().includes(jobTypeQuery.toLowerCase());
- 
+                    const cityMatches = isLocationMatch(sanitizedData.location, cityQuery);
+                    const jobTypeMatches = jobTypeQuery === '' || sanitizedData.positionName.toLowerCase().includes(jobTypeQuery.toLowerCase());
 
                     if (cityMatches && jobTypeMatches) {
                         allResults.push(sanitizedData);
                     }
-                    
-
                 })
                 .on('end', () => {
                     filesProcessed++;
                     if (filesProcessed === csvFiles.length) {
-                        // Sort by parsedDate descending before slicing for pagination
                         allResults.sort((a, b) => b.parsedDate - a.parsedDate);
                         const resultsForPage = allResults.slice(startIndex, startIndex + limit);
                         res.json({
@@ -91,7 +81,6 @@ app.get('/jobs', (req, res) => {
         });
     });
 });
-
 
 
 
