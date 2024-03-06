@@ -11,11 +11,7 @@ function sanitizeKey(key) {
   return key.replace(/[^\w\s]/gi, '').trim();
 }
 
-function hasMatchingLetters(str1, str2, count) {
-  const letters1 = new Set(str1.toLowerCase().split(''));
-  const matchingLetters = [...str2.toLowerCase()].filter(letter => letters1.has(letter));
-  return new Set(matchingLetters).size >= count;
-}
+
 
 // Helper function to parse date strings in ISO format
 function parseISODate(dateString) {
@@ -24,6 +20,11 @@ function parseISODate(dateString) {
 }
 
 app.use(express.static('public'));
+
+function isLocationMatch(location, cityQuery) {
+    if (!cityQuery) return true;
+    return location.toLowerCase().includes(cityQuery.toLowerCase());
+}
 
 app.get('/jobs', (req, res) => {
     let allResults = [];
@@ -62,12 +63,16 @@ app.get('/jobs', (req, res) => {
                         sanitizedData.parsedDate = parseISODate(sanitizedData.postingDateParsed);
                     }
 
-                    const cityMatches = cityQuery === '' || hasMatchingLetters(sanitizedData.location, cityQuery, 3);
-                    const jobTypeMatches = jobTypeQuery === '' || sanitizedData.positionName.toLowerCase().includes(jobTypeQuery.toLowerCase());
+                     // Use isLocationMatch for a more accurate location match
+                     const cityMatches = isLocationMatch(sanitizedData.location, cityQuery);
+                     const jobTypeMatches = jobTypeQuery === '' || sanitizedData.positionName.toLowerCase().includes(jobTypeQuery.toLowerCase());
+ 
 
                     if (cityMatches && jobTypeMatches) {
                         allResults.push(sanitizedData);
                     }
+                    
+
                 })
                 .on('end', () => {
                     filesProcessed++;
@@ -86,6 +91,8 @@ app.get('/jobs', (req, res) => {
         });
     });
 });
+
+
 
 
 app.listen(port, () => {
