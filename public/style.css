@@ -1,129 +1,108 @@
 /* Base styles */
-body {
+body, html {
+    margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #e8e8e8;
     color: #333;
     line-height: 1.6;
+    height: 100%;
 }
 
-/* Centering the container and adding shadow for depth */
+/* Full-width container */
 .container {
-    width: 80%;
-    margin: 20px auto;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
     background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100%;
+    box-shadow: none;
 }
 
-/* Styling for header */
+/* Futuristic header style */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    margin-bottom: 20px;
+    background-color: #2c3e50; /* Dark blue background */
+    color: #ecf0f1; /* Light grey text */
+    padding: 10px 0;
+    text-align: center;
 }
 
 header h1 {
     margin: 0;
-    text-align: center;
+    font-size: 2.5em;
+    font-weight: bold;
 }
 
-/* Search bar alignment and spacing */
+/* Navigation bar styling */
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #34495e; /* Darker blue background */
+    padding: 10px 0;
+}
+
+nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 8px 16px;
+    font-size: 1.1em;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav a:hover, nav a:focus {
+    background-color: #4aa3df; /* Bright blue background for hover/focus */
+    color: white;
+    text-decoration: none;
+}
+
+/* Search bar expansion */
 .search-bar {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 20px;
+    background-color: #ecf0f1; /* Light grey background */
+    padding: 20px 0; /* More padding for vertical space */
 }
 
-/* Individual search input styling */
-.search-bar input[type="text"] {
-    width: 200px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.search-bar input[type="text"], .search-bar button {
+    width: 20%; /* Adjusted width for full-screen design */
+    min-width: 120px; /* Minimum width to maintain usability */
 }
 
-/* Styling for the search button */
-.search-bar button {
-    padding: 10px 15px;
-    background-color: #555;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-/* Hover effect for the button */
-.search-bar button:hover {
-    background-color: #666;
-}
-
-/* Main job listings container */
+/* Main job listings full width */
 #jobListings {
-    margin-top: 20px;
+    margin: 0; /* Remove margin for full width */
+    padding: 20px; /* Padding inside listings */
 }
 
-/* Individual job listing card */
+/* Job listing card styling */
 .job-listing {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex; /* Changed to flex to allow side-by-side layout */
-    align-items: flex-start; /* Align items to start of the flex container */
-    gap: 20px; /* Space between the two main sections */
+    background: #ffffff; /* White background */
+    padding: 20px; /* Padding for spacing */
+    display: grid; /* Use grid for equal width columns */
+    grid-template-columns: 1fr 1fr; /* Two columns of equal width */
+    gap: 20px; /* Space between columns */
+    margin-bottom: 20px; /* Margin bottom for separation */
+    border: 1px solid #ddd; /* Border for definition */
+    border-radius: 5px; /* Rounded corners for aesthetics */
 }
 
-/* Job title and meta information */
-.job-listing .job-info {
-    flex: 1; /* Takes up remaining space */
-}
 
-/* Job description section */
+.job-listing .job-info, 
 .job-listing .job-description {
-    flex: 2; /* Allows this section to be wider than the .job-info */
-}
-
-/* Style for links */
-.job-listing a {
-    display: inline-block;
-    margin-top: 10px;
-    color: #0056b3;
-    text-decoration: none;
-}
-
-/* Hover effect for links */
-.job-listing a:hover {
-    text-decoration: underline;
-}
-
-/* Paragraphs inside job listing */
-.job-listing p {
-    margin: 10px 0;
-}
-
-/* Metadata display */
-.job-meta {
+    border: 1px solid #e1e1e1; /* Light grey border */
+    background: #fafafa; /* Slightly off-white background */
+    padding: 15px; /* Padding inside the box */
+    border-radius: 4px; /* Rounded corners for the box */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.9em;
-    color: #666;
+    flex-direction: column; /* Stack the contents vertically */
+    justify-content: space-between; /* Distribute space between items */
 }
-
-.job-meta span {
-    margin-right: 20px;
-}
-
 /* Apply Now button specific styles */
 .apply-link {
     padding: 8px 12px;
     background-color: rgb(223, 223, 223); /* Green background */
-    color: white;
+    color: #3498db; /* Dark blue background */
     border: none;
     border-radius: 4px;
     text-align: center;
@@ -149,7 +128,7 @@ header h1 {
 
 /* Pagination buttons styling */
 .pagination-btn {
-    background-color: rgb(145, 213, 243); /* Darker green on hover */
+    background-color: #4aa3df; /* Bright blue background */
     color: white;
     padding: 10px 20px;
     text-align: center;
@@ -159,28 +138,13 @@ header h1 {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-  }
-  
-  .pagination-btn:hover {
-    background-color: rgb(145, 213, 243); /* Darker green on hover */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-  }
-  
-  /* Disable text selection on buttons */
-  .pagination-btn {
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
-  }
-  
-  /* Additional styling for the pagination container */
-  #pagination {
-    text-align: center; /* Center the buttons */
-    padding: 20px; /* Add some padding around the buttons */
-    margin-top: 20px; /* Add space between listings and pagination */
-  }
-  .survey-link {
+}
+.pagination-btn:hover {
+    background-color: #3498db;  /* Slightly darker blue on hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.survey-link {
     display: inline-block;
     background-color: rgb(223, 223, 223); /* Green background */
     color: #0056b3;
@@ -198,42 +162,72 @@ header h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
 }
 
-  
 
-
-
-/* Responsive design for mobile devices */
+/* Responsive design adjustments */
 @media (max-width: 768px) {
-    .container {
-        width: 95%;
-    }
-
-    .search-bar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
     .search-bar input[type="text"],
     .search-bar button {
-        width: 100%;
-        margin-bottom: 10px;
+    width: 100%;
+    margin-bottom: 10px;
     }
-
     .job-listing {
-        flex-direction: column; /* Stack the layout on smaller screens */
+        flex-direction: column; /* Stack layout on smaller screens */
     }
-
-    .job-meta {
-        flex-direction: column;
-        align-items: flex-start;
+    
+    .search-bar,
+    .job-info,
+    .job-description {
+        padding: 10px; /* Adjust padding on smaller screens */
     }
-
-    .job-meta span {
-        margin: 5px 0;
+    
+    .apply-link {
+        margin-top: 10px; /* Adjust spacing for apply button */
     }
-
-
-
-
-
+    
+    nav {
+        flex-direction: column; /* Stack navigation links on smaller screens */
+    }
+    
+    nav a {
+        width: 100%; /* Full width navigation links on small screens */
+        margin-bottom: 5px; /* Spacing between navigation links */
+    }
+    /* Survey link adjustments for better visibility */
+    .survey-link {
+        background-color: #3498db; /* Match the apply button color */
+        color: white; /* White text for better contrast */
+        padding: 10px 15px; /* Increase padding for larger click area */
+        font-size: 1em; /* Increase font size for better readability */
+    }
+    /* Increase the entire container width to full screen */
+    .container {
+        width: 100vw; /* Set to the viewport width */
+        box-shadow: none; /* Remove shadow since it's now full width */
+    }
+    /*Remove the margins from the job listings for a full width layout */
+    #jobListings {
+        margin: 0; /* No margin for full width */
+        padding: 0; /* No padding */
+    }
+    /* Align the navigation bar items to the right and make it full width */
+    nav {
+        justify-content: flex-end; /* Align navigation items to the right */
+        width: 100vw; /* Full viewport width */
+        box-sizing: border-box; /* Include padding and border in the width */
+    }
+    /* Additional styling for navigation bar items */
+    nav a {
+    margin: 0 10px; /* Spacing between items */
+    padding: 10px 20px; /* Padding inside each link */
+    }
 }
+
+
+
+
+
+
+
+
+
+   
